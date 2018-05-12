@@ -1,0 +1,430 @@
+
+I2C.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000002f6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000282  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000015  00800100  00800100  000002f6  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002f6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000328  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000088  00000000  00000000  00000368  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a8f  00000000  00000000  000003f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000086d  00000000  00000000  00000e7f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000047c  00000000  00000000  000016ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000114  00000000  00000000  00001b68  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000048b  00000000  00000000  00001c7c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000001fb  00000000  00000000  00002107  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000068  00000000  00000000  00002302  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 7f 00 	jmp	0xfe	; 0xfe <__vector_24>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a5 31       	cpi	r26, 0x15	; 21
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 1a 01 	call	0x234	; 0x234 <main>
+  88:	0c 94 3f 01 	jmp	0x27e	; 0x27e <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <I2C_IO_Init>:
+	{
+		for (uint8_t byteCounter = 0; byteCounter < messageSize; byteCounter++)	placeToReceive[byteCounter] = I2C_ReceiveBuffer[byteCounter];
+	}
+	
+	return (I2C_StatusFlags.transfer);
+}
+  90:	87 b1       	in	r24, 0x07	; 7
+  92:	8f 7c       	andi	r24, 0xCF	; 207
+  94:	87 b9       	out	0x07, r24	; 7
+  96:	88 b1       	in	r24, 0x08	; 8
+  98:	80 63       	ori	r24, 0x30	; 48
+  9a:	88 b9       	out	0x08, r24	; 8
+  9c:	08 95       	ret
+
+0000009e <I2C_Init>:
+  9e:	cf 92       	push	r12
+  a0:	df 92       	push	r13
+  a2:	ef 92       	push	r14
+  a4:	ff 92       	push	r15
+  a6:	cf 93       	push	r28
+  a8:	6b 01       	movw	r12, r22
+  aa:	7c 01       	movw	r14, r24
+  ac:	c4 2f       	mov	r28, r20
+  ae:	0e 94 48 00 	call	0x90	; 0x90 <I2C_IO_Init>
+  b2:	60 e0       	ldi	r22, 0x00	; 0
+  b4:	74 e2       	ldi	r23, 0x24	; 36
+  b6:	84 ef       	ldi	r24, 0xF4	; 244
+  b8:	90 e0       	ldi	r25, 0x00	; 0
+  ba:	a7 01       	movw	r20, r14
+  bc:	96 01       	movw	r18, r12
+  be:	0e 94 1d 01 	call	0x23a	; 0x23a <__udivmodsi4>
+  c2:	ca 01       	movw	r24, r20
+  c4:	b9 01       	movw	r22, r18
+  c6:	60 51       	subi	r22, 0x10	; 16
+  c8:	71 09       	sbc	r23, r1
+  ca:	81 09       	sbc	r24, r1
+  cc:	91 09       	sbc	r25, r1
+  ce:	4c 2f       	mov	r20, r28
+  d0:	50 e0       	ldi	r21, 0x00	; 0
+  d2:	9a 01       	movw	r18, r20
+  d4:	22 0f       	add	r18, r18
+  d6:	33 1f       	adc	r19, r19
+  d8:	03 2e       	mov	r0, r19
+  da:	00 0c       	add	r0, r0
+  dc:	44 0b       	sbc	r20, r20
+  de:	55 0b       	sbc	r21, r21
+  e0:	0e 94 1d 01 	call	0x23a	; 0x23a <__udivmodsi4>
+  e4:	20 93 b8 00 	sts	0x00B8, r18	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7e00b8>
+  e8:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+  ec:	84 e0       	ldi	r24, 0x04	; 4
+  ee:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+  f2:	cf 91       	pop	r28
+  f4:	ff 90       	pop	r15
+  f6:	ef 90       	pop	r14
+  f8:	df 90       	pop	r13
+  fa:	cf 90       	pop	r12
+  fc:	08 95       	ret
+
+000000fe <__vector_24>:
+
+ISR (TWI_vect)
+{
+  fe:	1f 92       	push	r1
+ 100:	0f 92       	push	r0
+ 102:	0f b6       	in	r0, 0x3f	; 63
+ 104:	0f 92       	push	r0
+ 106:	11 24       	eor	r1, r1
+ 108:	8f 93       	push	r24
+ 10a:	9f 93       	push	r25
+ 10c:	ef 93       	push	r30
+ 10e:	ff 93       	push	r31
+	static uint8_t bufferPointer;
+	
+	switch(TWSR & I2C_STATUS_MASK)
+ 110:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7e00b9>
+ 114:	88 7f       	andi	r24, 0xF8	; 248
+ 116:	80 33       	cpi	r24, 0x30	; 48
+ 118:	09 f4       	brne	.+2      	; 0x11c <__vector_24+0x1e>
+ 11a:	44 c0       	rjmp	.+136    	; 0x1a4 <__vector_24+0xa6>
+ 11c:	88 f4       	brcc	.+34     	; 0x140 <__vector_24+0x42>
+ 11e:	80 31       	cpi	r24, 0x10	; 16
+ 120:	11 f1       	breq	.+68     	; 0x166 <__vector_24+0x68>
+ 122:	30 f4       	brcc	.+12     	; 0x130 <__vector_24+0x32>
+ 124:	88 23       	and	r24, r24
+ 126:	09 f4       	brne	.+2      	; 0x12a <__vector_24+0x2c>
+ 128:	6c c0       	rjmp	.+216    	; 0x202 <__vector_24+0x104>
+ 12a:	88 30       	cpi	r24, 0x08	; 8
+ 12c:	e1 f0       	breq	.+56     	; 0x166 <__vector_24+0x68>
+ 12e:	70 c0       	rjmp	.+224    	; 0x210 <__vector_24+0x112>
+ 130:	80 32       	cpi	r24, 0x20	; 32
+ 132:	c1 f1       	breq	.+112    	; 0x1a4 <__vector_24+0xa6>
+ 134:	88 32       	cpi	r24, 0x28	; 40
+ 136:	c9 f0       	breq	.+50     	; 0x16a <__vector_24+0x6c>
+ 138:	88 31       	cpi	r24, 0x18	; 24
+ 13a:	09 f0       	breq	.+2      	; 0x13e <__vector_24+0x40>
+ 13c:	69 c0       	rjmp	.+210    	; 0x210 <__vector_24+0x112>
+ 13e:	15 c0       	rjmp	.+42     	; 0x16a <__vector_24+0x6c>
+ 140:	88 34       	cpi	r24, 0x48	; 72
+ 142:	09 f4       	brne	.+2      	; 0x146 <__vector_24+0x48>
+ 144:	51 c0       	rjmp	.+162    	; 0x1e8 <__vector_24+0xea>
+ 146:	28 f4       	brcc	.+10     	; 0x152 <__vector_24+0x54>
+ 148:	88 33       	cpi	r24, 0x38	; 56
+ 14a:	81 f1       	breq	.+96     	; 0x1ac <__vector_24+0xae>
+ 14c:	80 34       	cpi	r24, 0x40	; 64
+ 14e:	f1 f1       	breq	.+124    	; 0x1cc <__vector_24+0xce>
+ 150:	5f c0       	rjmp	.+190    	; 0x210 <__vector_24+0x112>
+ 152:	88 35       	cpi	r24, 0x58	; 88
+ 154:	09 f4       	brne	.+2      	; 0x158 <__vector_24+0x5a>
+ 156:	4c c0       	rjmp	.+152    	; 0x1f0 <__vector_24+0xf2>
+ 158:	88 3f       	cpi	r24, 0xF8	; 248
+ 15a:	09 f4       	brne	.+2      	; 0x15e <__vector_24+0x60>
+ 15c:	56 c0       	rjmp	.+172    	; 0x20a <__vector_24+0x10c>
+ 15e:	80 35       	cpi	r24, 0x50	; 80
+ 160:	09 f0       	breq	.+2      	; 0x164 <__vector_24+0x66>
+ 162:	56 c0       	rjmp	.+172    	; 0x210 <__vector_24+0x112>
+ 164:	27 c0       	rjmp	.+78     	; 0x1b4 <__vector_24+0xb6>
+	{
+		case I2C_START:
+		case I2C_REPEATED_START:	bufferPointer = 0;									//	
+ 166:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+		case MT_SLA_ACK:
+		case MT_DATA_ACK:
+		{
+			if (bufferPointer < I2C_MessageSize)
+ 16a:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <_edata>
+ 16e:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <I2C_MessageSize>
+ 172:	e8 17       	cp	r30, r24
+ 174:	70 f4       	brcc	.+28     	; 0x192 <__vector_24+0x94>
+			{
+				TWDR = I2C_TransmitBuffer[bufferPointer++];
+ 176:	81 e0       	ldi	r24, 0x01	; 1
+ 178:	8e 0f       	add	r24, r30
+ 17a:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 17e:	f0 e0       	ldi	r31, 0x00	; 0
+ 180:	e5 5f       	subi	r30, 0xF5	; 245
+ 182:	fe 4f       	sbci	r31, 0xFE	; 254
+ 184:	80 81       	ld	r24, Z
+ 186:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+				TWCR =	(1 << TWEN) |												// 
+ 18a:	85 e8       	ldi	r24, 0x85	; 133
+ 18c:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 190:	3f c0       	rjmp	.+126    	; 0x210 <__vector_24+0x112>
+						(0 << TWEA) | (0 << TWSTA) | (0 << TWSTO) |					// 
+						(0 << TWWC);												//	Clear Write Collision flag
+			}
+			else
+			{
+				I2C_StatusFlags.transfer = I2C_SUCCESS_FLAG;
+ 192:	80 91 14 01 	lds	r24, 0x0114	; 0x800114 <I2C_StatusFlags>
+ 196:	81 60       	ori	r24, 0x01	; 1
+ 198:	80 93 14 01 	sts	0x0114, r24	; 0x800114 <I2C_StatusFlags>
+				TWCR =	(1 << TWEN) |												// 
+ 19c:	84 e9       	ldi	r24, 0x94	; 148
+ 19e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 1a2:	36 c0       	rjmp	.+108    	; 0x210 <__vector_24+0x112>
+			(0 << TWWC);															//	Clear Write Collision flag
+}
+
+void I2C_Start (void)
+{
+	TWCR =	(1 << TWEN) |															//	Enable I2C
+ 1a4:	85 ea       	ldi	r24, 0xA5	; 165
+ 1a6:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 1aa:	32 c0       	rjmp	.+100    	; 0x210 <__vector_24+0x112>
+ 1ac:	85 ea       	ldi	r24, 0xA5	; 165
+ 1ae:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 1b2:	2e c0       	rjmp	.+92     	; 0x210 <__vector_24+0x112>
+			I2C_Start();
+			
+			break;
+		}
+
+        case MR_DATA_ACK:   I2C_ReceiveBuffer[bufferPointer++] = TWDR;
+ 1b4:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <_edata>
+ 1b8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ba:	8e 0f       	add	r24, r30
+ 1bc:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 1c0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c2:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7e00bb>
+ 1c6:	ee 5f       	subi	r30, 0xFE	; 254
+ 1c8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1ca:	80 83       	st	Z, r24
+        case MR_SLA_ACK:
+        {
+            if (bufferPointer < I2C_MessageSize)
+ 1cc:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <_edata>
+ 1d0:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <I2C_MessageSize>
+ 1d4:	98 17       	cp	r25, r24
+ 1d6:	20 f4       	brcc	.+8      	; 0x1e0 <__vector_24+0xe2>
+            {
+                TWCR =	(1 << TWEN) |															// 
+ 1d8:	85 ec       	ldi	r24, 0xC5	; 197
+ 1da:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 1de:	18 c0       	rjmp	.+48     	; 0x210 <__vector_24+0x112>
+			            (1 << TWEA) | (0 << TWSTA) | (0 << TWSTO) |								// 
+			            (0 << TWWC);															//	Clear Write Collision flag
+            }
+            else
+            {
+                TWCR =	(1 << TWEN) |															// 
+ 1e0:	85 e8       	ldi	r24, 0x85	; 133
+ 1e2:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 1e6:	14 c0       	rjmp	.+40     	; 0x210 <__vector_24+0x112>
+        }
+        
+        case MR_SLA_NACK:
+        {
+	        //  Send stop/start or stop followed by a start
+	        TWCR =	(1 << TWEN) |															//
+ 1e8:	84 e9       	ldi	r24, 0x94	; 148
+ 1ea:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+					(0 << TWIE) | (1 << TWINT) |											//
+				    (0 << TWEA) | (0 << TWSTA) | (1 << TWSTO) |								//
+					(0 << TWWC);															//	Clear Write Collision flag
+
+	        break;
+ 1ee:	10 c0       	rjmp	.+32     	; 0x210 <__vector_24+0x112>
+		
+		case MR_DATA_NACK:
+		{
+			//  Send stop/start or stop followed by a start
+			//I2C_ReceiveBuffer[bufferPointer++] = TWDR;	//???????????????????
+			I2C_StatusFlags.transfer = 1;
+ 1f0:	80 91 14 01 	lds	r24, 0x0114	; 0x800114 <I2C_StatusFlags>
+ 1f4:	81 60       	ori	r24, 0x01	; 1
+ 1f6:	80 93 14 01 	sts	0x0114, r24	; 0x800114 <I2C_StatusFlags>
+			TWCR =  (1 << TWEN) |													// Enable TWI-interface and release TWI pins.
+ 1fa:	84 e9       	ldi	r24, 0x94	; 148
+ 1fc:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+					(0 << TWIE) | (1 << TWINT) |									// Enable Interrupt and clear the flag.
+					(0 << TWEA) | (0 << TWSTA) | (1 << TWSTO) |						// Initiate a STOP condition.
+					(0 << TWWC);													//	Clear Write Collision flag
+			
+			break;
+ 200:	07 c0       	rjmp	.+14     	; 0x210 <__vector_24+0x112>
+			(0 << TWWC);															//	Clear Write Collision flag
+}
+
+void I2C_Stop (void)
+{
+	TWCR =	(1 << TWEN) |															// 
+ 202:	85 e9       	ldi	r24, 0x95	; 149
+ 204:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+ 208:	03 c0       	rjmp	.+6      	; 0x210 <__vector_24+0x112>
+			break;
+		}
+
+		case I2C_NO_RELEVANT_STATE_INFORMATION:
+		{
+			TWCR =	(1 << TWEN) |															//
+ 20a:	84 e0       	ldi	r24, 0x04	; 4
+ 20c:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7e00bc>
+			break;
+		}
+
+		default:    break;
+	}
+}
+ 210:	ff 91       	pop	r31
+ 212:	ef 91       	pop	r30
+ 214:	9f 91       	pop	r25
+ 216:	8f 91       	pop	r24
+ 218:	0f 90       	pop	r0
+ 21a:	0f be       	out	0x3f, r0	; 63
+ 21c:	0f 90       	pop	r0
+ 21e:	1f 90       	pop	r1
+ 220:	18 95       	reti
+
+00000222 <setup>:
+}
+
+void setup (void)
+{
+	IO_Init();
+	I2C_Init(I2C_SCL_FREQUENCY, I2C_PRESCALER);
+ 222:	41 e0       	ldi	r20, 0x01	; 1
+ 224:	60 ea       	ldi	r22, 0xA0	; 160
+ 226:	76 e8       	ldi	r23, 0x86	; 134
+ 228:	81 e0       	ldi	r24, 0x01	; 1
+ 22a:	90 e0       	ldi	r25, 0x00	; 0
+ 22c:	0e 94 4f 00 	call	0x9e	; 0x9e <I2C_Init>
+	
+	sei();
+ 230:	78 94       	sei
+ 232:	08 95       	ret
+
+00000234 <main>:
+}
+
+int main (void)
+{
+	setup();
+ 234:	0e 94 11 01 	call	0x222	; 0x222 <setup>
+ 238:	ff cf       	rjmp	.-2      	; 0x238 <main+0x4>
+
+0000023a <__udivmodsi4>:
+ 23a:	a1 e2       	ldi	r26, 0x21	; 33
+ 23c:	1a 2e       	mov	r1, r26
+ 23e:	aa 1b       	sub	r26, r26
+ 240:	bb 1b       	sub	r27, r27
+ 242:	fd 01       	movw	r30, r26
+ 244:	0d c0       	rjmp	.+26     	; 0x260 <__udivmodsi4_ep>
+
+00000246 <__udivmodsi4_loop>:
+ 246:	aa 1f       	adc	r26, r26
+ 248:	bb 1f       	adc	r27, r27
+ 24a:	ee 1f       	adc	r30, r30
+ 24c:	ff 1f       	adc	r31, r31
+ 24e:	a2 17       	cp	r26, r18
+ 250:	b3 07       	cpc	r27, r19
+ 252:	e4 07       	cpc	r30, r20
+ 254:	f5 07       	cpc	r31, r21
+ 256:	20 f0       	brcs	.+8      	; 0x260 <__udivmodsi4_ep>
+ 258:	a2 1b       	sub	r26, r18
+ 25a:	b3 0b       	sbc	r27, r19
+ 25c:	e4 0b       	sbc	r30, r20
+ 25e:	f5 0b       	sbc	r31, r21
+
+00000260 <__udivmodsi4_ep>:
+ 260:	66 1f       	adc	r22, r22
+ 262:	77 1f       	adc	r23, r23
+ 264:	88 1f       	adc	r24, r24
+ 266:	99 1f       	adc	r25, r25
+ 268:	1a 94       	dec	r1
+ 26a:	69 f7       	brne	.-38     	; 0x246 <__udivmodsi4_loop>
+ 26c:	60 95       	com	r22
+ 26e:	70 95       	com	r23
+ 270:	80 95       	com	r24
+ 272:	90 95       	com	r25
+ 274:	9b 01       	movw	r18, r22
+ 276:	ac 01       	movw	r20, r24
+ 278:	bd 01       	movw	r22, r26
+ 27a:	cf 01       	movw	r24, r30
+ 27c:	08 95       	ret
+
+0000027e <_exit>:
+ 27e:	f8 94       	cli
+
+00000280 <__stop_program>:
+ 280:	ff cf       	rjmp	.-2      	; 0x280 <__stop_program>

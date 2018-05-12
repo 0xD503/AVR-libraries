@@ -1,0 +1,727 @@
+
+Temperature and humidity sensor DHT11.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001e  00800100  00000402  00000496  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000402  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000006  0080011e  0080011e  000004b4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004b4  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004e4  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000e8  00000000  00000000  00000524  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000011fc  00000000  00000000  0000060c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000a25  00000000  00000000  00001808  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000096f  00000000  00000000  0000222d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000194  00000000  00000000  00002b9c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005b5  00000000  00000000  00002d30  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000005bc  00000000  00000000  000032e5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000d0  00000000  00000000  000038a1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e2 e0       	ldi	r30, 0x02	; 2
+  7c:	f4 e0       	ldi	r31, 0x04	; 4
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ae 31       	cpi	r26, 0x1E	; 30
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	ae e1       	ldi	r26, 0x1E	; 30
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a4 32       	cpi	r26, 0x24	; 36
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 9e 01 	call	0x33c	; 0x33c <main>
+  9e:	0c 94 ff 01 	jmp	0x3fe	; 0x3fe <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <DHT11_Init>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  a6:	2f e3       	ldi	r18, 0x3F	; 63
+  a8:	8d e0       	ldi	r24, 0x0D	; 13
+  aa:	93 e0       	ldi	r25, 0x03	; 3
+  ac:	21 50       	subi	r18, 0x01	; 1
+  ae:	80 40       	sbci	r24, 0x00	; 0
+  b0:	90 40       	sbci	r25, 0x00	; 0
+  b2:	e1 f7       	brne	.-8      	; 0xac <DHT11_Init+0x6>
+  b4:	00 c0       	rjmp	.+0      	; 0xb6 <DHT11_Init+0x10>
+  b6:	00 00       	nop
+  b8:	08 95       	ret
+
+000000ba <DHT11_StartComunication>:
+	_delay_ms(1000);
+}
+
+void DHT11_StartComunication (void)
+{
+	DHT11_PORT |= 1 << DHT11_PIN;
+  ba:	40 9a       	sbi	0x08, 0	; 8
+	DHT11_DDR |= 1 << DHT11_PIN;
+  bc:	38 9a       	sbi	0x07, 0	; 7
+  be:	87 e8       	ldi	r24, 0x87	; 135
+  c0:	93 e1       	ldi	r25, 0x13	; 19
+  c2:	01 97       	sbiw	r24, 0x01	; 1
+  c4:	f1 f7       	brne	.-4      	; 0xc2 <DHT11_StartComunication+0x8>
+  c6:	00 c0       	rjmp	.+0      	; 0xc8 <DHT11_StartComunication+0xe>
+  c8:	00 00       	nop
+	_delay_ms(DHT11_RESET_TIME);
+	
+	DHT11_PORT &= ~(1 << DHT11_PIN);
+  ca:	40 98       	cbi	0x08, 0	; 8
+  cc:	83 e9       	ldi	r24, 0x93	; 147
+  ce:	91 e1       	ldi	r25, 0x11	; 17
+  d0:	01 97       	sbiw	r24, 0x01	; 1
+  d2:	f1 f7       	brne	.-4      	; 0xd0 <DHT11_StartComunication+0x16>
+  d4:	00 c0       	rjmp	.+0      	; 0xd6 <DHT11_StartComunication+0x1c>
+  d6:	00 00       	nop
+	_delay_ms(DHT11_START_SIGNAL_TIME);
+	
+	DHT11_PORT |= 1 << DHT11_PIN;
+  d8:	40 9a       	sbi	0x08, 0	; 8
+	DHT11_DDR &= ~(1 << DHT11_PIN);
+  da:	38 98       	cbi	0x07, 0	; 7
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  dc:	9a e0       	ldi	r25, 0x0A	; 10
+  de:	9a 95       	dec	r25
+  e0:	f1 f7       	brne	.-4      	; 0xde <DHT11_StartComunication+0x24>
+  e2:	08 95       	ret
+
+000000e4 <DHT11_Response>:
+  e4:	8d e0       	ldi	r24, 0x0D	; 13
+  e6:	8a 95       	dec	r24
+  e8:	f1 f7       	brne	.-4      	; 0xe6 <DHT11_Response+0x2>
+  ea:	00 00       	nop
+uint8_t DHT11_Response (void)
+{
+	uint8_t DHT_Respond;
+	
+	_delay_us(40);
+	if (!(DHT11_PINS & (1 << DHT11_PIN)))
+  ec:	30 99       	sbic	0x06, 0	; 6
+  ee:	0c c0       	rjmp	.+24     	; 0x108 <DHT11_Response+0x24>
+  f0:	8a e1       	ldi	r24, 0x1A	; 26
+  f2:	8a 95       	dec	r24
+  f4:	f1 f7       	brne	.-4      	; 0xf2 <DHT11_Response+0xe>
+  f6:	00 c0       	rjmp	.+0      	; 0xf8 <DHT11_Response+0x14>
+	{
+		_delay_us(80);
+		if ((DHT11_PINS & (1 << DHT11_PIN)))
+  f8:	30 9b       	sbis	0x06, 0	; 6
+  fa:	08 c0       	rjmp	.+16     	; 0x10c <DHT11_Response+0x28>
+  fc:	8d e0       	ldi	r24, 0x0D	; 13
+  fe:	8a 95       	dec	r24
+ 100:	f1 f7       	brne	.-4      	; 0xfe <DHT11_Response+0x1a>
+ 102:	00 00       	nop
+		{
+			DHT_Respond = DHT11_RESPOND;
+ 104:	8f ef       	ldi	r24, 0xFF	; 255
+ 106:	08 95       	ret
+			_delay_us(40);
+		}
+		else	DHT_Respond = DHT11_DOES_NOT_RESPOND;
+	}
+	else	DHT_Respond = DHT11_DOES_NOT_RESPOND;
+ 108:	80 e0       	ldi	r24, 0x00	; 0
+ 10a:	08 95       	ret
+		if ((DHT11_PINS & (1 << DHT11_PIN)))
+		{
+			DHT_Respond = DHT11_RESPOND;
+			_delay_us(40);
+		}
+		else	DHT_Respond = DHT11_DOES_NOT_RESPOND;
+ 10c:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	else	DHT_Respond = DHT11_DOES_NOT_RESPOND;
+	
+	return (DHT_Respond);
+}
+ 10e:	08 95       	ret
+
+00000110 <DHT11_ReceiveData>:
+
+uint8_t DHT11_ReceiveData (void)
+{
+ 110:	cf 93       	push	r28
+ 112:	df 93       	push	r29
+	cli();
+ 114:	f8 94       	cli
+ 116:	af e1       	ldi	r26, 0x1F	; 31
+ 118:	b1 e0       	ldi	r27, 0x01	; 1
+ 11a:	c4 e2       	ldi	r28, 0x24	; 36
+ 11c:	d1 e0       	ldi	r29, 0x01	; 1
+			if (DHT11_PINS & (1 << DHT11_PIN))
+			{
+				DHT11_Data[i] |= 1 << j;
+				while (DHT11_PINS & (DHT11_PIN));
+			}
+			else	DHT11_Data[i] &= ~(1 << j);
+ 11e:	41 e0       	ldi	r20, 0x01	; 1
+ 120:	50 e0       	ldi	r21, 0x00	; 0
+ 122:	fd 01       	movw	r30, r26
+uint8_t DHT11_ReceiveData (void)
+{
+	cli();
+	for (uint8_t i = 0; i < 5; i++)
+	{
+		DHT11_Data[i] = 0x00;
+ 124:	1c 92       	st	X, r1
+ 126:	87 e0       	ldi	r24, 0x07	; 7
+ 128:	90 e0       	ldi	r25, 0x00	; 0
+		for (int8_t j = 7; j >= 0; j--)
+		{
+			while (!(DHT11_PINS & (1 << DHT11_PIN)));
+ 12a:	30 9b       	sbis	0x06, 0	; 6
+ 12c:	fe cf       	rjmp	.-4      	; 0x12a <DHT11_ReceiveData+0x1a>
+ 12e:	2a e0       	ldi	r18, 0x0A	; 10
+ 130:	2a 95       	dec	r18
+ 132:	f1 f7       	brne	.-4      	; 0x130 <DHT11_ReceiveData+0x20>
+			_delay_us(30);
+			if (DHT11_PINS & (1 << DHT11_PIN))
+ 134:	30 9b       	sbis	0x06, 0	; 6
+ 136:	0c c0       	rjmp	.+24     	; 0x150 <DHT11_ReceiveData+0x40>
+			{
+				DHT11_Data[i] |= 1 << j;
+ 138:	60 81       	ld	r22, Z
+ 13a:	9a 01       	movw	r18, r20
+ 13c:	08 2e       	mov	r0, r24
+ 13e:	02 c0       	rjmp	.+4      	; 0x144 <DHT11_ReceiveData+0x34>
+ 140:	22 0f       	add	r18, r18
+ 142:	33 1f       	adc	r19, r19
+ 144:	0a 94       	dec	r0
+ 146:	e2 f7       	brpl	.-8      	; 0x140 <DHT11_ReceiveData+0x30>
+ 148:	26 2b       	or	r18, r22
+ 14a:	20 83       	st	Z, r18
+				while (DHT11_PINS & (DHT11_PIN));
+ 14c:	26 b1       	in	r18, 0x06	; 6
+ 14e:	0b c0       	rjmp	.+22     	; 0x166 <DHT11_ReceiveData+0x56>
+			}
+			else	DHT11_Data[i] &= ~(1 << j);
+ 150:	9a 01       	movw	r18, r20
+ 152:	08 2e       	mov	r0, r24
+ 154:	02 c0       	rjmp	.+4      	; 0x15a <DHT11_ReceiveData+0x4a>
+ 156:	22 0f       	add	r18, r18
+ 158:	33 1f       	adc	r19, r19
+ 15a:	0a 94       	dec	r0
+ 15c:	e2 f7       	brpl	.-8      	; 0x156 <DHT11_ReceiveData+0x46>
+ 15e:	20 95       	com	r18
+ 160:	30 81       	ld	r19, Z
+ 162:	23 23       	and	r18, r19
+ 164:	20 83       	st	Z, r18
+ 166:	01 97       	sbiw	r24, 0x01	; 1
+ 168:	00 f7       	brcc	.-64     	; 0x12a <DHT11_ReceiveData+0x1a>
+ 16a:	11 96       	adiw	r26, 0x01	; 1
+}
+
+uint8_t DHT11_ReceiveData (void)
+{
+	cli();
+	for (uint8_t i = 0; i < 5; i++)
+ 16c:	ac 17       	cp	r26, r28
+ 16e:	bd 07       	cpc	r27, r29
+ 170:	c1 f6       	brne	.-80     	; 0x122 <DHT11_ReceiveData+0x12>
+				while (DHT11_PINS & (DHT11_PIN));
+			}
+			else	DHT11_Data[i] &= ~(1 << j);
+		}
+	}
+	sei();
+ 172:	78 94       	sei
+	
+	uint8_t dataCorrect;
+	if (DHT11_Data[4] == DHT11_Data[0] + DHT11_Data[1] + DHT11_Data[2] + DHT11_Data[3])	dataCorrect = 0xFF;
+ 174:	ef e1       	ldi	r30, 0x1F	; 31
+ 176:	f1 e0       	ldi	r31, 0x01	; 1
+ 178:	80 81       	ld	r24, Z
+ 17a:	21 81       	ldd	r18, Z+1	; 0x01
+ 17c:	30 e0       	ldi	r19, 0x00	; 0
+ 17e:	28 0f       	add	r18, r24
+ 180:	31 1d       	adc	r19, r1
+ 182:	82 81       	ldd	r24, Z+2	; 0x02
+ 184:	28 0f       	add	r18, r24
+ 186:	31 1d       	adc	r19, r1
+ 188:	83 81       	ldd	r24, Z+3	; 0x03
+ 18a:	28 0f       	add	r18, r24
+ 18c:	31 1d       	adc	r19, r1
+ 18e:	44 81       	ldd	r20, Z+4	; 0x04
+ 190:	50 e0       	ldi	r21, 0x00	; 0
+ 192:	81 e0       	ldi	r24, 0x01	; 1
+ 194:	24 17       	cp	r18, r20
+ 196:	35 07       	cpc	r19, r21
+ 198:	09 f0       	breq	.+2      	; 0x19c <DHT11_ReceiveData+0x8c>
+ 19a:	80 e0       	ldi	r24, 0x00	; 0
+ 19c:	81 95       	neg	r24
+	{
+		dataCorrect = 0x00;
+//		DHT11_ErrorCode = DHT11_CODE_2;
+	}
+	
+	while(!(DHT11_PINS & (1 << DHT11_PIN)));
+ 19e:	30 9b       	sbis	0x06, 0	; 6
+ 1a0:	fe cf       	rjmp	.-4      	; 0x19e <DHT11_ReceiveData+0x8e>
+	
+	return (dataCorrect);
+}
+ 1a2:	df 91       	pop	r29
+ 1a4:	cf 91       	pop	r28
+ 1a6:	08 95       	ret
+
+000001a8 <DHT11_ReadData>:
+
+void DHT11_ReadData (void)
+{
+	DHT11_StartComunication();
+ 1a8:	0e 94 5d 00 	call	0xba	; 0xba <DHT11_StartComunication>
+	if (DHT11_Response())
+ 1ac:	0e 94 72 00 	call	0xe4	; 0xe4 <DHT11_Response>
+ 1b0:	88 23       	and	r24, r24
+ 1b2:	61 f0       	breq	.+24     	; 0x1cc <DHT11_ReadData+0x24>
+	{
+		if (DHT11_ReceiveData()) DHT11_ErrorCode = 0x30;
+ 1b4:	0e 94 88 00 	call	0x110	; 0x110 <DHT11_ReceiveData>
+ 1b8:	88 23       	and	r24, r24
+ 1ba:	21 f0       	breq	.+8      	; 0x1c4 <DHT11_ReadData+0x1c>
+ 1bc:	80 e3       	ldi	r24, 0x30	; 48
+ 1be:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <DHT11_ErrorCode>
+ 1c2:	08 95       	ret
+		else	DHT11_ErrorCode = DHT11_CODE_2;
+ 1c4:	82 e3       	ldi	r24, 0x32	; 50
+ 1c6:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <DHT11_ErrorCode>
+ 1ca:	08 95       	ret
+	}
+	else	DHT11_ErrorCode = DHT11_CODE_1;
+ 1cc:	81 e3       	ldi	r24, 0x31	; 49
+ 1ce:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <DHT11_ErrorCode>
+ 1d2:	08 95       	ret
+
+000001d4 <LCD_GetAddressAndBFStatus>:
+	LCD_STROBE_DOWN;
+	lowNibble >>= 4;
+	LCD_Data |= lowNibble;
+	
+	LCD_DDR |= (1 << LCD_DATA_PIN_4 | 1 << LCD_DATA_PIN_5 | 1 << LCD_DATA_PIN_6 | 1 << LCD_DATA_PIN_7);				//	Set LCD pins as outputs
+	LCD_CheckBF();
+ 1d4:	8a b1       	in	r24, 0x0a	; 10
+ 1d6:	8f 70       	andi	r24, 0x0F	; 15
+ 1d8:	8a b9       	out	0x0a, r24	; 10
+ 1da:	8e 60       	ori	r24, 0x0E	; 14
+ 1dc:	8a b9       	out	0x0a, r24	; 10
+ 1de:	8b b1       	in	r24, 0x0b	; 11
+ 1e0:	8f 70       	andi	r24, 0x0F	; 15
+ 1e2:	8b b9       	out	0x0b, r24	; 11
+ 1e4:	5a 9a       	sbi	0x0b, 2	; 11
+ 1e6:	59 98       	cbi	0x0b, 1	; 11
+ 1e8:	5b 9a       	sbi	0x0b, 3	; 11
+ 1ea:	00 00       	nop
+ 1ec:	00 00       	nop
+ 1ee:	89 b1       	in	r24, 0x09	; 9
+ 1f0:	80 93 1e 01 	sts	0x011E, r24	; 0x80011e <__data_end>
+ 1f4:	5b 98       	cbi	0x0b, 3	; 11
+ 1f6:	00 00       	nop
+ 1f8:	00 00       	nop
+ 1fa:	80 91 1e 01 	lds	r24, 0x011E	; 0x80011e <__data_end>
+ 1fe:	80 7f       	andi	r24, 0xF0	; 240
+ 200:	80 93 1e 01 	sts	0x011E, r24	; 0x80011e <__data_end>
+ 204:	5b 9a       	sbi	0x0b, 3	; 11
+ 206:	00 00       	nop
+ 208:	00 00       	nop
+ 20a:	89 b1       	in	r24, 0x09	; 9
+ 20c:	5b 98       	cbi	0x0b, 3	; 11
+ 20e:	82 95       	swap	r24
+ 210:	8f 70       	andi	r24, 0x0F	; 15
+ 212:	90 91 1e 01 	lds	r25, 0x011E	; 0x80011e <__data_end>
+ 216:	89 2b       	or	r24, r25
+ 218:	80 93 1e 01 	sts	0x011E, r24	; 0x80011e <__data_end>
+ 21c:	8a b1       	in	r24, 0x0a	; 10
+ 21e:	80 6f       	ori	r24, 0xF0	; 240
+ 220:	8a b9       	out	0x0a, r24	; 10
+ 222:	08 95       	ret
+
+00000224 <LCD_CheckBF>:
+ 224:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <LCD_GetAddressAndBFStatus>
+ 228:	80 91 1e 01 	lds	r24, 0x011E	; 0x80011e <__data_end>
+ 22c:	88 23       	and	r24, r24
+ 22e:	d4 f3       	brlt	.-12     	; 0x224 <LCD_CheckBF>
+ 230:	08 95       	ret
+
+00000232 <LCD_SendInstructionAndData>:
+ 232:	5a 98       	cbi	0x0b, 2	; 11
+ 234:	61 11       	cpse	r22, r1
+ 236:	02 c0       	rjmp	.+4      	; 0x23c <LCD_SendInstructionAndData+0xa>
+ 238:	59 98       	cbi	0x0b, 1	; 11
+ 23a:	01 c0       	rjmp	.+2      	; 0x23e <LCD_SendInstructionAndData+0xc>
+ 23c:	59 9a       	sbi	0x0b, 1	; 11
+ 23e:	9b b1       	in	r25, 0x0b	; 11
+ 240:	9f 70       	andi	r25, 0x0F	; 15
+ 242:	9b b9       	out	0x0b, r25	; 11
+ 244:	9b b1       	in	r25, 0x0b	; 11
+ 246:	28 2f       	mov	r18, r24
+ 248:	20 7f       	andi	r18, 0xF0	; 240
+ 24a:	92 2b       	or	r25, r18
+ 24c:	9b b9       	out	0x0b, r25	; 11
+ 24e:	5b 9a       	sbi	0x0b, 3	; 11
+ 250:	00 00       	nop
+ 252:	00 00       	nop
+ 254:	00 00       	nop
+ 256:	5b 98       	cbi	0x0b, 3	; 11
+ 258:	00 00       	nop
+ 25a:	00 00       	nop
+ 25c:	9b b1       	in	r25, 0x0b	; 11
+ 25e:	9f 70       	andi	r25, 0x0F	; 15
+ 260:	9b b9       	out	0x0b, r25	; 11
+ 262:	9b b1       	in	r25, 0x0b	; 11
+ 264:	82 95       	swap	r24
+ 266:	80 7f       	andi	r24, 0xF0	; 240
+ 268:	89 2b       	or	r24, r25
+ 26a:	8b b9       	out	0x0b, r24	; 11
+ 26c:	5b 9a       	sbi	0x0b, 3	; 11
+ 26e:	00 00       	nop
+ 270:	00 00       	nop
+ 272:	00 00       	nop
+ 274:	5b 98       	cbi	0x0b, 3	; 11
+ 276:	0e 94 12 01 	call	0x224	; 0x224 <LCD_CheckBF>
+ 27a:	08 95       	ret
+
+0000027c <LCD_PutInstruction>:
+ 27c:	60 e0       	ldi	r22, 0x00	; 0
+ 27e:	0e 94 19 01 	call	0x232	; 0x232 <LCD_SendInstructionAndData>
+ 282:	08 95       	ret
+
+00000284 <LCD_PutByte>:
+ 284:	61 e0       	ldi	r22, 0x01	; 1
+ 286:	0e 94 19 01 	call	0x232	; 0x232 <LCD_SendInstructionAndData>
+ 28a:	08 95       	ret
+
+0000028c <LCD_SendString>:
+ 28c:	cf 93       	push	r28
+ 28e:	df 93       	push	r29
+ 290:	ec 01       	movw	r28, r24
+ 292:	88 81       	ld	r24, Y
+ 294:	88 23       	and	r24, r24
+ 296:	31 f0       	breq	.+12     	; 0x2a4 <LCD_SendString+0x18>
+ 298:	21 96       	adiw	r28, 0x01	; 1
+ 29a:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+ 29e:	89 91       	ld	r24, Y+
+ 2a0:	81 11       	cpse	r24, r1
+ 2a2:	fb cf       	rjmp	.-10     	; 0x29a <LCD_SendString+0xe>
+ 2a4:	df 91       	pop	r29
+ 2a6:	cf 91       	pop	r28
+ 2a8:	08 95       	ret
+
+000002aa <LCD_SetPosition>:
+ 2aa:	90 e4       	ldi	r25, 0x40	; 64
+ 2ac:	69 9f       	mul	r22, r25
+ 2ae:	80 0d       	add	r24, r0
+ 2b0:	11 24       	eor	r1, r1
+ 2b2:	81 54       	subi	r24, 0x41	; 65
+ 2b4:	80 68       	ori	r24, 0x80	; 128
+ 2b6:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+ 2ba:	08 95       	ret
+
+000002bc <sendInstructionLCD8>:
+}
+
+void sendInstructionLCD8 (uint8_t byte)
+{
+	LCD_PORT = byte;
+ 2bc:	8b b9       	out	0x0b, r24	; 11
+	LCD_STROBE_UP;
+ 2be:	5b 9a       	sbi	0x0b, 3	; 11
+	asm ("nop");
+ 2c0:	00 00       	nop
+	asm ("nop");
+ 2c2:	00 00       	nop
+	asm ("nop");
+ 2c4:	00 00       	nop
+	LCD_STROBE_DOWN;
+ 2c6:	5b 98       	cbi	0x0b, 3	; 11
+ 2c8:	08 95       	ret
+
+000002ca <LCD_Init>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2ca:	8f e9       	ldi	r24, 0x9F	; 159
+ 2cc:	9f e0       	ldi	r25, 0x0F	; 15
+ 2ce:	01 97       	sbiw	r24, 0x01	; 1
+ 2d0:	f1 f7       	brne	.-4      	; 0x2ce <LCD_Init+0x4>
+ 2d2:	00 c0       	rjmp	.+0      	; 0x2d4 <LCD_Init+0xa>
+ 2d4:	00 00       	nop
+}
+
+void LCD_Init (void)
+{
+	_delay_ms(16);
+	sendInstructionLCD8(0x30);					//	8-bit mode
+ 2d6:	80 e3       	ldi	r24, 0x30	; 48
+ 2d8:	0e 94 5e 01 	call	0x2bc	; 0x2bc <sendInstructionLCD8>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2dc:	84 e6       	ldi	r24, 0x64	; 100
+ 2de:	94 e0       	ldi	r25, 0x04	; 4
+ 2e0:	01 97       	sbiw	r24, 0x01	; 1
+ 2e2:	f1 f7       	brne	.-4      	; 0x2e0 <LCD_Init+0x16>
+ 2e4:	00 c0       	rjmp	.+0      	; 0x2e6 <LCD_Init+0x1c>
+ 2e6:	00 00       	nop
+	_delay_us(4500);
+	sendInstructionLCD8(0x30);					//	8-bit mode
+ 2e8:	80 e3       	ldi	r24, 0x30	; 48
+ 2ea:	0e 94 5e 01 	call	0x2bc	; 0x2bc <sendInstructionLCD8>
+ 2ee:	96 e2       	ldi	r25, 0x26	; 38
+ 2f0:	9a 95       	dec	r25
+ 2f2:	f1 f7       	brne	.-4      	; 0x2f0 <LCD_Init+0x26>
+ 2f4:	00 00       	nop
+	_delay_us(115);
+	sendInstructionLCD8(0x30);					//	8-bit mode
+ 2f6:	80 e3       	ldi	r24, 0x30	; 48
+ 2f8:	0e 94 5e 01 	call	0x2bc	; 0x2bc <sendInstructionLCD8>
+	LCD_CheckBF();								//	Busy Flag waiting
+ 2fc:	0e 94 12 01 	call	0x224	; 0x224 <LCD_CheckBF>
+	sendInstructionLCD8(0x20);					//	4-bit mode
+ 300:	80 e2       	ldi	r24, 0x20	; 32
+ 302:	0e 94 5e 01 	call	0x2bc	; 0x2bc <sendInstructionLCD8>
+	LCD_CheckBF();
+ 306:	0e 94 12 01 	call	0x224	; 0x224 <LCD_CheckBF>
+	LCD_PutInstruction(0x28);					//	4-bit mode, 2 lines, character font 5x8
+ 30a:	88 e2       	ldi	r24, 0x28	; 40
+ 30c:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+	LCD_PutInstruction(0x14);					// 
+ 310:	84 e1       	ldi	r24, 0x14	; 20
+ 312:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+	LCD_PutInstruction(0x0F);					//	Display on, cursor on, blinking on
+ 316:	8f e0       	ldi	r24, 0x0F	; 15
+ 318:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+	LCD_PutInstruction(0x06);					// 
+ 31c:	86 e0       	ldi	r24, 0x06	; 6
+ 31e:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+	LCD_PutInstruction(0x10);					//	Entry mode set
+ 322:	80 e1       	ldi	r24, 0x10	; 16
+ 324:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+	LCD_PutInstruction(LCD_CLEAR_DISPLAY);
+ 328:	81 e0       	ldi	r24, 0x01	; 1
+ 32a:	0e 94 3e 01 	call	0x27c	; 0x27c <LCD_PutInstruction>
+ 32e:	08 95       	ret
+
+00000330 <setup>:
+}
+
+void setup (void)
+{
+	IO_Init();
+	LCD_Init();
+ 330:	0e 94 65 01 	call	0x2ca	; 0x2ca <LCD_Init>
+	DHT11_Init();
+ 334:	0e 94 53 00 	call	0xa6	; 0xa6 <DHT11_Init>
+	
+	sei();
+ 338:	78 94       	sei
+ 33a:	08 95       	ret
+
+0000033c <main>:
+}
+
+int main (void)
+{
+	setup();
+ 33c:	0e 94 98 01 	call	0x330	; 0x330 <setup>
+	{
+		DHT11_ReadData();
+ 		
+		LCD_SetPosition(1,1);
+		LCD_SendString((int8_t* ) "Temperature: ");
+		LCD_PutByte((DHT11_Data[2] / 10) + ASCII_NULL);
+ 340:	cf e1       	ldi	r28, 0x1F	; 31
+ 342:	d1 e0       	ldi	r29, 0x01	; 1
+ 344:	1d ec       	ldi	r17, 0xCD	; 205
+	
+	
+	
+	while (1)
+	{
+		DHT11_ReadData();
+ 346:	0e 94 d4 00 	call	0x1a8	; 0x1a8 <DHT11_ReadData>
+ 		
+		LCD_SetPosition(1,1);
+ 34a:	61 e0       	ldi	r22, 0x01	; 1
+ 34c:	81 e0       	ldi	r24, 0x01	; 1
+ 34e:	0e 94 55 01 	call	0x2aa	; 0x2aa <LCD_SetPosition>
+		LCD_SendString((int8_t* ) "Temperature: ");
+ 352:	81 e0       	ldi	r24, 0x01	; 1
+ 354:	91 e0       	ldi	r25, 0x01	; 1
+ 356:	0e 94 46 01 	call	0x28c	; 0x28c <LCD_SendString>
+		LCD_PutByte((DHT11_Data[2] / 10) + ASCII_NULL);
+ 35a:	8a 81       	ldd	r24, Y+2	; 0x02
+ 35c:	81 9f       	mul	r24, r17
+ 35e:	81 2d       	mov	r24, r1
+ 360:	11 24       	eor	r1, r1
+ 362:	86 95       	lsr	r24
+ 364:	86 95       	lsr	r24
+ 366:	86 95       	lsr	r24
+ 368:	80 5d       	subi	r24, 0xD0	; 208
+ 36a:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+		LCD_PutByte((DHT11_Data[2] % 10) + ASCII_NULL);
+ 36e:	8a 81       	ldd	r24, Y+2	; 0x02
+ 370:	81 9f       	mul	r24, r17
+ 372:	91 2d       	mov	r25, r1
+ 374:	11 24       	eor	r1, r1
+ 376:	96 95       	lsr	r25
+ 378:	96 95       	lsr	r25
+ 37a:	96 95       	lsr	r25
+ 37c:	99 0f       	add	r25, r25
+ 37e:	29 2f       	mov	r18, r25
+ 380:	22 0f       	add	r18, r18
+ 382:	22 0f       	add	r18, r18
+ 384:	92 0f       	add	r25, r18
+ 386:	89 1b       	sub	r24, r25
+ 388:	80 5d       	subi	r24, 0xD0	; 208
+ 38a:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+		LCD_SendString((int8_t* ) "°C");
+ 38e:	8f e0       	ldi	r24, 0x0F	; 15
+ 390:	91 e0       	ldi	r25, 0x01	; 1
+ 392:	0e 94 46 01 	call	0x28c	; 0x28c <LCD_SendString>
+		
+		LCD_SetPosition(1,2);
+ 396:	62 e0       	ldi	r22, 0x02	; 2
+ 398:	81 e0       	ldi	r24, 0x01	; 1
+ 39a:	0e 94 55 01 	call	0x2aa	; 0x2aa <LCD_SetPosition>
+		LCD_SendString((int8_t* ) "Humidity: ");
+ 39e:	82 e1       	ldi	r24, 0x12	; 18
+ 3a0:	91 e0       	ldi	r25, 0x01	; 1
+ 3a2:	0e 94 46 01 	call	0x28c	; 0x28c <LCD_SendString>
+		LCD_PutByte((DHT11_Data[0] / 10) + ASCII_NULL);
+ 3a6:	88 81       	ld	r24, Y
+ 3a8:	81 9f       	mul	r24, r17
+ 3aa:	81 2d       	mov	r24, r1
+ 3ac:	11 24       	eor	r1, r1
+ 3ae:	86 95       	lsr	r24
+ 3b0:	86 95       	lsr	r24
+ 3b2:	86 95       	lsr	r24
+ 3b4:	80 5d       	subi	r24, 0xD0	; 208
+ 3b6:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+		LCD_PutByte((DHT11_Data[0] % 10) + ASCII_NULL);
+ 3ba:	88 81       	ld	r24, Y
+ 3bc:	81 9f       	mul	r24, r17
+ 3be:	91 2d       	mov	r25, r1
+ 3c0:	11 24       	eor	r1, r1
+ 3c2:	96 95       	lsr	r25
+ 3c4:	96 95       	lsr	r25
+ 3c6:	96 95       	lsr	r25
+ 3c8:	99 0f       	add	r25, r25
+ 3ca:	29 2f       	mov	r18, r25
+ 3cc:	22 0f       	add	r18, r18
+ 3ce:	22 0f       	add	r18, r18
+ 3d0:	92 0f       	add	r25, r18
+ 3d2:	89 1b       	sub	r24, r25
+ 3d4:	80 5d       	subi	r24, 0xD0	; 208
+ 3d6:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+		LCD_PutByte('%');
+ 3da:	85 e2       	ldi	r24, 0x25	; 37
+ 3dc:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+		
+		LCD_SetPosition(15, 2);
+ 3e0:	62 e0       	ldi	r22, 0x02	; 2
+ 3e2:	8f e0       	ldi	r24, 0x0F	; 15
+ 3e4:	0e 94 55 01 	call	0x2aa	; 0x2aa <LCD_SetPosition>
+		LCD_PutByte(DHT11_ErrorCode);
+ 3e8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <DHT11_ErrorCode>
+ 3ec:	0e 94 42 01 	call	0x284	; 0x284 <LCD_PutByte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 3f0:	87 ea       	ldi	r24, 0xA7	; 167
+ 3f2:	91 e6       	ldi	r25, 0x61	; 97
+ 3f4:	01 97       	sbiw	r24, 0x01	; 1
+ 3f6:	f1 f7       	brne	.-4      	; 0x3f4 <main+0xb8>
+ 3f8:	00 c0       	rjmp	.+0      	; 0x3fa <main+0xbe>
+ 3fa:	00 00       	nop
+ 3fc:	a4 cf       	rjmp	.-184    	; 0x346 <main+0xa>
+
+000003fe <_exit>:
+ 3fe:	f8 94       	cli
+
+00000400 <__stop_program>:
+ 400:	ff cf       	rjmp	.-2      	; 0x400 <__stop_program>

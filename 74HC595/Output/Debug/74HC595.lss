@@ -1,0 +1,308 @@
+
+74HC595.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000001b8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000164  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000001b8  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001e8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000080  00000000  00000000  00000228  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000936  00000000  00000000  000002a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000798  00000000  00000000  00000bde  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004ca  00000000  00000000  00001376  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000e0  00000000  00000000  00001840  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003ff  00000000  00000000  00001920  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000021e  00000000  00000000  00001d1f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000060  00000000  00000000  00001f3d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 aa 00 	call	0x154	; 0x154 <main>
+  78:	0c 94 b0 00 	jmp	0x160	; 0x160 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <HC595_ResetShiftRegister>:
+#include "HC595.h"
+
+void HC595_ResetShiftRegister (void)
+{
+	HC595_RESET;				//	RESET PIN = 0
+  80:	2c 98       	cbi	0x05, 4	; 5
+	...
+	/*_delay_ms(10);*/			//	For low frequency MCU clock wait 10 ms
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  8a:	00 00       	nop
+	HC595_CLEAR_RESET;			//	RESET PIN = 1
+  8c:	2c 9a       	sbi	0x05, 4	; 5
+	...
+	/*_delay_ms(10);*/
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  96:	00 00       	nop
+  98:	08 95       	ret
+
+0000009a <HC595_Init>:
+}
+
+void HC595_Init (void)
+{
+	HC595_DDR |= 1 << HC595_DATA_PIN | 1 << HC595_OUTPUT_ENABLE_PIN | 1 << HC595_LATCH_CLOCK_PIN | 1 << HC595_SHIFT_CLOCK_PIN | 1 << HC595_RESET_PIN;		//	Set HC595 pins as outputs
+  9a:	84 b1       	in	r24, 0x04	; 4
+  9c:	8f 61       	ori	r24, 0x1F	; 31
+  9e:	84 b9       	out	0x04, r24	; 4
+	HC595_ResetShiftRegister();																																//	RESET
+  a0:	0e 94 40 00 	call	0x80	; 0x80 <HC595_ResetShiftRegister>
+	HC595_OUTPUT_ENABLE;																																	//	Output Enable = 0
+  a4:	29 98       	cbi	0x05, 1	; 5
+  a6:	08 95       	ret
+
+000000a8 <HC595_Shift>:
+}
+
+void HC595_Shift (void)
+{
+	HC595_SHIFT_CLOCK_HIGH;				//	SC = 1
+  a8:	2b 9a       	sbi	0x05, 3	; 5
+	...
+	//_delay_ms(10);
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  b2:	00 00       	nop
+	HC595_SHIFT_CLOCK_LOW;				//	SC = 0
+  b4:	2b 98       	cbi	0x05, 3	; 5
+	...
+	//_delay_ms(10);
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  be:	00 00       	nop
+  c0:	08 95       	ret
+
+000000c2 <HC595_Latch>:
+}
+
+void HC595_Latch (void)
+{
+	HC595_LATCH_CLOCK_HIGH;				//	Latch pin = 1
+  c2:	2a 9a       	sbi	0x05, 2	; 5
+	...
+	//_delay_ms(10);
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  cc:	00 00       	nop
+	HC595_LATCH_CLOCK_LOW;				// Latch pin = 0
+  ce:	2a 98       	cbi	0x05, 2	; 5
+	...
+	//_delay_ms(10);
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+	asm ("nop");
+  d8:	00 00       	nop
+  da:	08 95       	ret
+
+000000dc <HC595_MirrorByte>:
+}
+
+uint8_t HC595_MirrorByte (uint8_t byte)
+{
+  dc:	27 e0       	ldi	r18, 0x07	; 7
+  de:	30 e0       	ldi	r19, 0x00	; 0
+	uint8_t temp = 0;
+	uint8_t mirrorByte = 0;
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+	for (int8_t i = 7; i >= 0; i--)
+	{
+		temp = byte & 0x01;
+		byte >>= 1;
+		if (temp)	mirrorByte |= (1 << i);
+		else mirrorByte &= ~(1 << i);
+  e2:	61 e0       	ldi	r22, 0x01	; 1
+  e4:	70 e0       	ldi	r23, 0x00	; 0
+{
+	uint8_t temp = 0;
+	uint8_t mirrorByte = 0;
+	for (int8_t i = 7; i >= 0; i--)
+	{
+		temp = byte & 0x01;
+  e6:	48 2f       	mov	r20, r24
+  e8:	41 70       	andi	r20, 0x01	; 1
+		byte >>= 1;
+  ea:	86 95       	lsr	r24
+		if (temp)	mirrorByte |= (1 << i);
+  ec:	44 23       	and	r20, r20
+  ee:	49 f0       	breq	.+18     	; 0x102 <HC595_MirrorByte+0x26>
+  f0:	ab 01       	movw	r20, r22
+  f2:	02 2e       	mov	r0, r18
+  f4:	02 c0       	rjmp	.+4      	; 0xfa <HC595_MirrorByte+0x1e>
+  f6:	44 0f       	add	r20, r20
+  f8:	55 1f       	adc	r21, r21
+  fa:	0a 94       	dec	r0
+  fc:	e2 f7       	brpl	.-8      	; 0xf6 <HC595_MirrorByte+0x1a>
+  fe:	94 2b       	or	r25, r20
+ 100:	09 c0       	rjmp	.+18     	; 0x114 <HC595_MirrorByte+0x38>
+		else mirrorByte &= ~(1 << i);
+ 102:	ab 01       	movw	r20, r22
+ 104:	02 2e       	mov	r0, r18
+ 106:	02 c0       	rjmp	.+4      	; 0x10c <HC595_MirrorByte+0x30>
+ 108:	44 0f       	add	r20, r20
+ 10a:	55 1f       	adc	r21, r21
+ 10c:	0a 94       	dec	r0
+ 10e:	e2 f7       	brpl	.-8      	; 0x108 <HC595_MirrorByte+0x2c>
+ 110:	40 95       	com	r20
+ 112:	94 23       	and	r25, r20
+ 114:	21 50       	subi	r18, 0x01	; 1
+ 116:	31 09       	sbc	r19, r1
+ 118:	30 f7       	brcc	.-52     	; 0xe6 <HC595_MirrorByte+0xa>
+	}
+	
+	return (mirrorByte);
+}
+ 11a:	89 2f       	mov	r24, r25
+ 11c:	08 95       	ret
+
+0000011e <HC595_PutByteWithoutScrolling>:
+
+void HC595_PutByteWithoutScrolling (uint8_t byte)										//	In this function the latch occurs after the transmission of the whole byte
+{
+ 11e:	cf 93       	push	r28
+ 120:	df 93       	push	r29
+	uint8_t temp = 0;
+	byte = HC595_MirrorByte(byte);
+ 122:	0e 94 6e 00 	call	0xdc	; 0xdc <HC595_MirrorByte>
+ 126:	d8 2f       	mov	r29, r24
+ 128:	c8 e0       	ldi	r28, 0x08	; 8
+	for (uint8_t i = 0; i < 8; i++)
+	{
+		temp = byte & 0x01;
+ 12a:	8d 2f       	mov	r24, r29
+ 12c:	81 70       	andi	r24, 0x01	; 1
+		byte >>= 1;
+ 12e:	d6 95       	lsr	r29
+		if (temp)	HC595_PORT |= 1 << HC595_DATA_PIN;
+ 130:	88 23       	and	r24, r24
+ 132:	11 f0       	breq	.+4      	; 0x138 <HC595_PutByteWithoutScrolling+0x1a>
+ 134:	28 9a       	sbi	0x05, 0	; 5
+ 136:	01 c0       	rjmp	.+2      	; 0x13a <HC595_PutByteWithoutScrolling+0x1c>
+		else	HC595_PORT &= ~(1 << HC595_DATA_PIN);
+ 138:	28 98       	cbi	0x05, 0	; 5
+		HC595_Shift();
+ 13a:	0e 94 54 00 	call	0xa8	; 0xa8 <HC595_Shift>
+ 13e:	c1 50       	subi	r28, 0x01	; 1
+
+void HC595_PutByteWithoutScrolling (uint8_t byte)										//	In this function the latch occurs after the transmission of the whole byte
+{
+	uint8_t temp = 0;
+	byte = HC595_MirrorByte(byte);
+	for (uint8_t i = 0; i < 8; i++)
+ 140:	a1 f7       	brne	.-24     	; 0x12a <HC595_PutByteWithoutScrolling+0xc>
+		byte >>= 1;
+		if (temp)	HC595_PORT |= 1 << HC595_DATA_PIN;
+		else	HC595_PORT &= ~(1 << HC595_DATA_PIN);
+		HC595_Shift();
+	}
+	HC595_Latch();
+ 142:	0e 94 61 00 	call	0xc2	; 0xc2 <HC595_Latch>
+}
+ 146:	df 91       	pop	r29
+ 148:	cf 91       	pop	r28
+ 14a:	08 95       	ret
+
+0000014c <setup>:
+}
+
+void setup (void)
+{
+	IO_Init();
+	HC595_Init();
+ 14c:	0e 94 4d 00 	call	0x9a	; 0x9a <HC595_Init>
+	
+	sei();
+ 150:	78 94       	sei
+ 152:	08 95       	ret
+
+00000154 <main>:
+}
+
+int main(void)
+{
+	setup();
+ 154:	0e 94 a6 00 	call	0x14c	; 0x14c <setup>
+	
+  	int8_t r = 0b10100111;
+	HC595_PutByteWithoutScrolling(r);
+ 158:	87 ea       	ldi	r24, 0xA7	; 167
+ 15a:	0e 94 8f 00 	call	0x11e	; 0x11e <HC595_PutByteWithoutScrolling>
+ 15e:	ff cf       	rjmp	.-2      	; 0x15e <main+0xa>
+
+00000160 <_exit>:
+ 160:	f8 94       	cli
+
+00000162 <__stop_program>:
+ 162:	ff cf       	rjmp	.-2      	; 0x162 <__stop_program>
